@@ -3,14 +3,18 @@
   <head>
     <title>Project Title</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta
+      name="viewport"
+      content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui"
+    >
     <style>
       @-ms-viewport { width: device-width; }
     </style>
     <link rel="stylesheet" href="vendor/reset.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64" href="/img/pano.svg">
   </head>
-  <body class="multiple-scenes view-control-buttons">
+  <body class="multiple-scenes ">
     <div id="pano"></div>
     <div id="sceneList">
       <ul class="scenes">
@@ -49,17 +53,17 @@
     <div id="titleBar">
       <h1 class="sceneName"></h1>
     </div>
-    <a href="javascript:void(0)" id="autorotateToggle">
+    <a href="javascript:void(0)" id="autorotateToggle" style="display: none;">
       <img class="icon off" src="img/play.png">
       <img class="icon on" src="img/pause.png">
     </a>
     <a href="javascript:void(0)" id="fullscreenToggle">
-      <img class="icon off" src="img/fullscreen.png">
-      <img class="icon on" src="img/windowed.png">
+      <img class="icon off" src="img/fullscreen.svg">
+      <img class="icon on" src="img/windowed.svg">
     </a>
     <a href="javascript:void(0)" id="sceneListToggle">
-      <img class="icon off" src="img/expand.png">
-      <img class="icon on" src="img/collapse.png">
+      <img class="icon off" src="img/menu.svg">
+      <img class="icon on" src="img/close.svg">
     </a>
     <a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1">
       <img class="icon" src="img/up.png">
@@ -79,16 +83,31 @@
     <a href="javascript:void(0)" id="viewOut" class="viewControlButton viewControlButton-6">
       <img class="icon" src="img/minus.png">
     </a>
-    <script
-      src="vendor/screenfull.min.js"
-    ></script>
-    <script
-      src="vendor/bowser.min.js"
-    ></script>
-    <script
-      src="vendor/marzipano.js"
-    ></script>
+    <script src="vendor/screenfull.min.js"></script>
+    <script src="vendor/bowser.min.js"></script>
+    <script src="vendor/marzipano.js"></script>
     <script src="data.js"></script>
+    <script>
+      document.title = APP_DATA.name;
+
+    var el = document.querySelector('#sceneList ul');
+
+    APP_DATA.scenes.forEach(i => {
+      var a = document.createElement('a');
+      var li = document.createElement('li');
+
+      a.classList.add('scene');
+      a.setAttribute('data-id', i.id);
+      a.setAttribute('href', 'javascript:void(0)');
+
+      li.classList.add('text');
+      li.innerHTML = i.name;
+
+      a.appendChild(li);
+      el.appendChild(a);
+
+    });
+    </script>
     <script src="index.js"></script>
   </body>
 </html>
